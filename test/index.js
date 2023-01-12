@@ -46,11 +46,11 @@ const App = () => {
 				Save changes
 			</button>
 			<PDFViewer
-				mode="paginated"
+				mode="scrolling"
 				config={{
 					relationVocabulary: [ 'located_at', 'observed_at' ]
 				}}
-				url="compressed.tracemonkey-pldi-09.pdf"
+				url="pdf-example-bookmarks.pdf"
 				annotations={annotations}
 				onCreateAnnotation={onCreateAnnotation}
 				onUpdateAnnotation={onUpdateAnnotation}

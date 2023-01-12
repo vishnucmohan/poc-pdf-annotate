@@ -6,6 +6,8 @@ import EndlessViewer from './endless/EndlessViewer';
 import PaginatedViewer from './paginated/PaginatedViewer';
 import Store from './AnnotationStore';
 
+import PaginatedViewerNew from './paginated-new/PaginatedViewer';
+
 import 'pdfjs-dist/web/pdf_viewer.css';
 import '@recogito/recogito-js/dist/recogito.min.css';
 import '@recogito/annotorious/dist/annotorious.min.css';
