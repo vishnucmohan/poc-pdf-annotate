@@ -68,7 +68,7 @@ const EndlessViewer = (props) => {
         ></input>
         <span
           id="numPages"
-          class="toolbarLabel"
+          className="toolbarLabel"
         >{`of ${props?.pdf?.numPages}`}</span>
       </header>
 
