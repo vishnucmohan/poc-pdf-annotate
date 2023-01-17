@@ -20,9 +20,9 @@ const App = () => {
       get: (searchParams, prop) => searchParams.get(prop),
     });
     let pdfURL = `${baseURL}/CaseBundleAPI/BundleFilesSelect?fileguid=${params.fileguid}&token=${params.token}`;
-    //const result = await fetch(pdfURL, { method: "HEAD" });
-    //if (result.ok) {
-    setPDFURL(pdfURL);
+    console.log(pdfURL);
+	setPDFURL(pdfURL);
+
     setToken(params.token);
     setFileGuild(params.fileguid);
 
@@ -48,23 +48,6 @@ const App = () => {
         setAnnotations(JSON.parse(result.Comments));
       }
     });
-
-    // fetch("sample-annotations.json")
-    //   .then((response) => response.json())
-    //   .then(setAnnotations);
-    // }
-    // else{
-    // 	toast.error("Session expired.", {
-    // 		position: "top-right",
-    // 		autoClose: 5000,
-    // 		hideProgressBar: true,
-    // 		closeOnClick: true,
-    // 		pauseOnHover: true,
-    // 		draggable: true,
-    // 		progress: undefined,
-    // 		theme: "colored",
-    // 	  });
-    // }
   }, []);
 
   const onButtonClick = async () => {
@@ -98,47 +81,6 @@ const App = () => {
         theme: "colored",
       });
     }
-    // await fetch(baseURL + "/CaseBundleAPI/BundleAnnotationInsert", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //     "access-control-allow-origin": "*",
-    //   },
-    //   body: JSON.stringify({
-    //     FileGUID: fileGuid,
-    //     Comments: "testts",
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data) {
-    //       toast.success("Annotation saved successfully", {
-    //         position: "top-right",
-    //         autoClose: 5000,
-    //         hideProgressBar: true,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "colored",
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     toast.error("An error occured. Please try again.", {
-    //       position: "top-right",
-    //       autoClose: 5000,
-    //       hideProgressBar: true,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //       theme: "colored",
-    //     });
-    //   });
-
-    //await bundleAnnotationInsert(data);
   };
 
   // CRUD event handlers
@@ -186,17 +128,19 @@ const App = () => {
       <button className="button" onClick={onButtonClick}>
         Save changes
       </button>
-      <PDFViewer
-        mode="scrolling"
-        config={{
-          relationVocabulary: ["located_at", "observed_at"],
-        }}
-        url={"pdf-example-bookmarks.pdf"}
-        annotations={annotations}
-        onCreateAnnotation={onCreateAnnotation}
-        onUpdateAnnotation={onUpdateAnnotation}
-        onDeleteAnnotation={onDeleteAnnotation}
-      />
+      {pdfURL && (
+        <PDFViewer
+          mode="scrolling"
+          config={{
+            relationVocabulary: ["located_at", "observed_at"],
+          }}
+          url={pdfURL}
+          annotations={annotations}
+          onCreateAnnotation={onCreateAnnotation}
+          onUpdateAnnotation={onUpdateAnnotation}
+          onDeleteAnnotation={onDeleteAnnotation}
+        />
+      )}
     </div>
   );
 };
