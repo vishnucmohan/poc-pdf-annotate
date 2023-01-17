@@ -45,7 +45,7 @@ const App = () => {
       token: params.token,
     }).then((result) => {
       if (result && result?.Comments) {
-        setAnnotations(result.Comments);
+        setAnnotations(JSON.parse(result.Comments));
       }
     });
 
