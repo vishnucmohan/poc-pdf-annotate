@@ -8,6 +8,7 @@ const Range = (maxValue) => Array.from(Array(maxValue).keys());
 
 const EndlessViewer = (props) => {
   const [debug, setDebug] = useState(false);
+  const [pagenum, setPagenum] = useState(1);
 
   const [annotationMode, setAnnotationMode] = useState("ANNOTATION");
 
@@ -24,9 +25,18 @@ const EndlessViewer = (props) => {
   const handleKeyDownSearch = (event) => {
     if (event.key === "Enter") {
       console.log(event.target.value);
+      setPagenum(event.target.value);
       var elmntToView = document.getElementById("dvpage_" + event.target.value);
       elmntToView.scrollIntoView();
     }
+  };
+
+  const handleOnChange = (event) => {
+   
+      console.log(event.target.value);
+      setPagenum(event.target.value);
+
+    
   };
 
   return (
@@ -65,6 +75,8 @@ const EndlessViewer = (props) => {
           autoComplete="off"
           max={props?.pdf?.numPages}
           onKeyDown={handleKeyDownSearch}
+          onChange={handleOnChange}
+          value={pagenum}
         ></input>
         <span
           id="numPages"

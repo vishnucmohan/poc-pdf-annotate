@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { pdfjs, PDFViewer } from "../src";
 import "./index.css";
-import { bundleAnnotationInsert } from "./utils/api";
+import { bundleAnnotationInsert, bundleAnnotationSelect } from "./utils/api";
 import { baseURL } from "./utils/request";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,39 +22,49 @@ const App = () => {
     let pdfURL = `${baseURL}/CaseBundleAPI/BundleFilesSelect?fileguid=${params.fileguid}&token=${params.token}`;
     //const result = await fetch(pdfURL, { method: "HEAD" });
     //if (result.ok) {
-      setPDFURL(pdfURL);
-      setToken(params.token);
-      setFileGuild(params.fileguid);
+    setPDFURL(pdfURL);
+    setToken(params.token);
+    setFileGuild(params.fileguid);
 
-      if (!params?.token || !params?.fileguid) {
-        toast.error("Please provide fileguid and token in query string", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+    if (!params?.token || !params?.fileguid) {
+      toast.error("Please provide fileguid and token in query string", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+
+    bundleAnnotationSelect({
+      fileguid: params.fileguid,
+      token: params.token,
+    }).then((result) => {
+      if (result && result?.Comments) {
+        setAnnotations(result.Comments);
       }
+    });
 
-      fetch("sample-annotations.json")
-        .then((response) => response.json())
-        .then(setAnnotations);
+    // fetch("sample-annotations.json")
+    //   .then((response) => response.json())
+    //   .then(setAnnotations);
     // }
-	// else{
-	// 	toast.error("Session expired.", {
-	// 		position: "top-right",
-	// 		autoClose: 5000,
-	// 		hideProgressBar: true,
-	// 		closeOnClick: true,
-	// 		pauseOnHover: true,
-	// 		draggable: true,
-	// 		progress: undefined,
-	// 		theme: "colored",
-	// 	  });
-	// }
+    // else{
+    // 	toast.error("Session expired.", {
+    // 		position: "top-right",
+    // 		autoClose: 5000,
+    // 		hideProgressBar: true,
+    // 		closeOnClick: true,
+    // 		pauseOnHover: true,
+    // 		draggable: true,
+    // 		progress: undefined,
+    // 		theme: "colored",
+    // 	  });
+    // }
   }, []);
 
   const onButtonClick = async () => {
@@ -62,9 +72,10 @@ const App = () => {
     const data = {
       FileGUID: fileGuid,
       Comments: JSON.stringify(annotations),
+      token: token,
     };
     let res = await bundleAnnotationInsert(data);
-    if (res === "Insert Successfull") {
+    if (res && res.TokenStatus) {
       toast.success("Annotation saved successfully", {
         position: "top-right",
         autoClose: 5000,
@@ -132,8 +143,10 @@ const App = () => {
 
   // CRUD event handlers
   const onCreateAnnotation = (a) => {
-    if (
-      annotations.findIndex((x) => {
+    if (!annotations) {
+      annotations.push(a);
+    } else if (
+      annotations?.findIndex((x) => {
         return x.id === a.id;
       }) === -1
     ) {
@@ -178,7 +191,7 @@ const App = () => {
         config={{
           relationVocabulary: ["located_at", "observed_at"],
         }}
-        url={pdfURL}
+        url={"pdf-example-bookmarks.pdf"}
         annotations={annotations}
         onCreateAnnotation={onCreateAnnotation}
         onUpdateAnnotation={onUpdateAnnotation}
