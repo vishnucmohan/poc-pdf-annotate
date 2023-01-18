@@ -7,6 +7,8 @@ body {
 #app main {
   background-color: #cbcbcb;
   padding: 110px 0 40px 0;
+  height: calc(100vh - 375px);
+  overflow: scroll;
 }
 
 header {
@@ -58,12 +60,12 @@ header label {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.pdf-viewer-container {
+/* .pdf-viewer-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
+} */
 
 .page-container {
   position: relative;
