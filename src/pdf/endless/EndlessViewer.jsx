@@ -102,6 +102,7 @@ const EndlessViewer = (props) => {
                 onUpdateAnnotation={props.onUpdateAnnotation}
                 onDeleteAnnotation={props.onDeleteAnnotation}
                 onCancelSelected={props.onCancelSelected}
+                scale={1.2}
               />
             </div>
           ))}
