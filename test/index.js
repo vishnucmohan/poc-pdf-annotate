@@ -21,7 +21,7 @@ const App = () => {
     });
     let pdfURL = `${baseURL}/CaseBundleAPI/BundleFilesSelect?fileguid=${params.fileguid}&token=${params.token}`;
     console.log(pdfURL);
-	setPDFURL(pdfURL);
+    setPDFURL(pdfURL);
 
     setToken(params.token);
     setFileGuild(params.fileguid);
@@ -58,7 +58,7 @@ const App = () => {
       token: token,
     };
     let res = await bundleAnnotationInsert(data);
-    if (res && res.TokenStatus) {
+    if (res && res.TokenStatus == 1) {
       toast.success("Annotation saved successfully", {
         position: "top-right",
         autoClose: 5000,
