@@ -42,7 +42,7 @@ const EndlessViewer = (props) => {
   return (
     <div>
       <header>
-        <button onClick={() => setDebug(!debug)}>
+        {/* <button onClick={() => setDebug(!debug)}>
           <span className="inner">
             <CgDebug />
           </span>
@@ -55,7 +55,7 @@ const EndlessViewer = (props) => {
           <span className="inner">
             <CgArrowsExpandDownRight />
           </span>
-        </button>
+        </button> */}
 
         <button
           className={annotationMode === "IMAGE" ? "active" : null}
