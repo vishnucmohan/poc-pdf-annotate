@@ -177,3 +177,11 @@ header label {
   border-radius: 2px;
   line-height: 14px;
 }
+
+.textLayer ::-moz-selection {
+  background: rgb(127 183 244 / 37%)!important;
+}
+
+.textLayer ::selection {
+  background: rgb(127 183 244 / 37%)!important;
+}
