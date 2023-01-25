@@ -19,3 +19,13 @@
 	box-shadow: 1px 0px 7px rgb(0 0 0 / 30%);
     margin-top: 10px;
 }
+
+.r6o-connections-edge-path{
+	display: none;
+}
+.r6o-connections-edge-label{
+	display: none;
+}
+.r6o-connections-edge{
+	display: none;
+}
