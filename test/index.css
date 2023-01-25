@@ -29,3 +29,9 @@
 .r6o-connections-edge{
 	display: none;
 }
+svg.r6o-connections-canvas{
+	display: none;
+}
+.r6o-connections-editor{
+	display: none;
+}
