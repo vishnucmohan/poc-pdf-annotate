@@ -35,3 +35,6 @@ svg.r6o-connections-canvas{
 .r6o-connections-editor{
 	display: none;
 }
+.Toastify__toast-theme--colored.Toastify__toast--success{
+	background: #4caf50!important;
+}
