@@ -6,8 +6,9 @@ body {
 
 #app main {
   background-color: #cbcbcb;
-  padding: 110px 0 40px 0;
-  height: calc(100vh - 375px);
+  padding: 30px 0 20px 0;
+  height: calc(100vh - 180px);
+  border-top: 1px solid #cbcbcb;
   overflow-x: auto;
 }
 
@@ -22,6 +23,10 @@ body {
 	width: 6px;
 	background-color: #F5F5F5;
 }
+.AnnotationViewPdf iframe{
+  width: 100%;
+  height: 665px;
+}
 
 #app main::-webkit-scrollbar-thumb
 {
@@ -30,9 +35,9 @@ body {
 
 header {
   /* position:fixed; */
-  width: 100%;
+  /* width: 100%; */
   padding: 20px;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3); */
   background-color: #fff;
   z-index: 3;
   display: flex;
@@ -77,12 +82,12 @@ header label {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* .pdf-viewer-container {
+.pdf-viewer-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-} */
+}
 
 .page-container {
   position: relative;
@@ -163,7 +168,6 @@ header label {
   line-height: 16px;
   outline-style: none;
 }
-
 .toolbarLabel {
   min-width: 16px;
   padding: 8px;
@@ -171,4 +175,10 @@ header label {
   margin: 5px;
   border-radius: 2px;
   line-height: 14px;
+}
+.textLayer ::-moz-selection {
+  background: rgb(127 183 244 / 37%)!important;
+}
+.textLayer ::selection {
+  background: rgb(127 183 244 / 37%)!important;
 }
